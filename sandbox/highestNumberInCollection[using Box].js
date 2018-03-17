@@ -14,7 +14,7 @@ const maxNumbers = mathMax(splitOnCommaSpace)
 function highestNumber(stringNumbers) {
   return Box(stringNumbers)
     .map(splitOnCommaSpace)
-    .map(ary => aryMap(Number)(ary))
+    .map(aryMap(Number))
     .fold(ary => Math.max.apply(null, ary))
 }
 
