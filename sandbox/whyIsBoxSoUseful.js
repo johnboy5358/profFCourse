@@ -1,6 +1,6 @@
 const Box = x => ({
-  pipe: f => Box(f(x)),
-  unwrap: f => f(x),
+  map: f => Box(f(x)),
+  fold: f => f(x),
   inspect: () => `Box(${x})`
 })
 
@@ -29,10 +29,10 @@ const onlyNumbers = filter(numFromStr)
 // doubleSquareAndSum : xs -> number
 function screenNumbersAndSum(xs) {
   return Box(xs)
-    .pipe(xs => onlyNumbers(xs))
-    .pipe(map(x => typeof x === 'number' ? x : numFromStr(x)))
-    .pipe(xs => map(Number)(xs))
-    .unwrap(xs => sumAllNums(xs))
+    .map(xs => onlyNumbers(xs))
+    .map(map(x => typeof x === 'number' ? x : numFromStr(x)))
+    .map(xs => map(Number)(xs))
+    .fold(xs => sumAllNums(xs))
 }
 
 console.log('Box use case ...')
