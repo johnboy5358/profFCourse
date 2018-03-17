@@ -16,6 +16,7 @@ const aryReduce = (fn, init) => xs => Array.prototype.reduce.call(xs, fn, init)
 // String functions
 const splitOn = splitBy => string => String.prototype.split.call(string, splitBy)
 const replace = (org, replaceby) => sourceStr => String.prototype.replace.call(sourceStr, org, replaceby)
+const strContains = (match, posn) => source => String.prototype.includes.call(source, match, posn)
 
 // Maths functions
 const mathMax = aryNums => Math.max.apply(null, aryNums)
