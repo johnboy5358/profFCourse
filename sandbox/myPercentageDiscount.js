@@ -1,7 +1,7 @@
 /*
   * So can we tidy this up a bit?
-  *  - by making a standalone curried version of the String.replace method we can use pointfree style. 
-
+  *  - by making a standalone curried version of the String.replace method we can use pointfree style.
+  *  - In the function moneyToFloat we can use pointfree style just by passing in the function parseFloat.
 */
 
 const Box = x => ({
@@ -10,7 +10,6 @@ const Box = x => ({
   inspect: () => `Box(${x})`
 })
 
-const pipe = (...fns) => x => fns.reduce((v, f) => f(v), x)
 const replace = (org, replaceby) => sourceStr => String.prototype.replace.call(sourceStr, org, replaceby)
 
 const moneyToFloat = str => {
