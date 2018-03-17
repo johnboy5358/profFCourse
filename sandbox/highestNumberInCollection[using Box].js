@@ -4,7 +4,7 @@ const Box = x => ({
   inspect: () => `Box(${x})`
 })
 
-const map = fn => xs => Array.prototype.map.call(xs, fn)
+const aryMap = fn => xs => Array.prototype.map.call(xs, fn)
 const splitOn = splitBy => string => String.prototype.split.call(string, splitBy)
 const mathMax = aryNums => Math.max.apply(null, aryNums)
 
@@ -14,7 +14,7 @@ const maxNumbers = mathMax(splitOnCommaSpace)
 function highestNumber(stringNumbers) {
   return Box(stringNumbers)
     .map(splitOnCommaSpace)
-    .map(ary => map(Number)(ary))
+    .map(ary => aryMap(Number)(ary))
     .fold(ary => Math.max.apply(null, ary))
 }
 
