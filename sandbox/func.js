@@ -1,7 +1,21 @@
+// Box sweet composition.
 const Box = x => ({
   map: f => Box(f(x)),
   fold: f => f(x),
   inspect: () => `Box(${x})`
+})
+
+// Either composable branching 
+const Right = x => ({
+  map: f => Right(f(x)),
+  fold: (f, g) => g(x),
+  inspect: () => `Right(${x})`
+})
+
+const Left = x => ({
+  map: f => Left(x),
+  fold: (f, g) => f(x),
+  inspect: () => `Left(${x})`
 })
 
 // General functions
