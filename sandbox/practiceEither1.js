@@ -20,10 +20,11 @@ const Left = x => ({
 })
 
 const rhymes = new Map([
+  ["ERRMSG", "Nothing found"],
   ["mary", "Mary had a little lamb ..."],
   ["larry", "Larry the lounge room lizard"],
   ["peter", "Peter Piper picked a peck of pickled peppercorns"],
-  ["john", "John pie pickle pud"]
+  ["jack", "Little Jack Horner sat in a corner..."]
 ])
 
 const fromNullableOrNotString = x => {
@@ -32,21 +33,30 @@ const fromNullableOrNotString = x => {
 
 // So with this function we can't yield a null or undefined
 // ... which is totally the point and very important in JavaScript!!!!!
-const giveMeAPhrase = phrases => key => {
-  const failMsg = 'Nothing found'
+const getPhrase = phrases => key => {
   return fromNullableOrNotString(key)
     .fold(
-      () => failMsg,
-       x => phrases.get(x)) || failMsg
+      () => phrases.get("ERRMSG"),
+      x => phrases.get(x))
+  || phrases.get("ERRMSG")
 }
 
-const giveMeAPhraseFromRhymes = giveMeAPhrase(rhymes)
+const getPhraseFromRhymes = getPhrase(rhymes)
 
-console.log(giveMeAPhraseFromRhymes('peter'))
+console.log(getPhraseFromRhymes('peter'))
 // => "Peter Piper picked a peck of pickled peppercorns"
 
-console.log(giveMeAPhraseFromRhymes('mary'))
+console.log(getPhraseFromRhymes('mary'))
 // => "Mary had a little lamb ..."
 
-console.log(giveMeAPhraseFromRhymes(212))
+console.log(getPhraseFromRhymes(212))
 // => "Nothing found"
+
+console.log(getPhraseFromRhymes({}))
+// => "Nothing found"
+
+console.log(getPhraseFromRhymes('john'))
+// => "Nothing found"
+
+console.log(getPhraseFromRhymes('jack'))
+// => Little Jack Horner sat in a corner...
